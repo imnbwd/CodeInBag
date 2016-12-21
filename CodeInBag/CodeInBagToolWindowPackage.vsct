@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+  <Commands package="guidCodeInBagToolWindowPackage">
+    <Menus>
+      <Menu guid="guidCodeInBagToolWindowPackageCmdSet" id="Toolbar" type="Toolbar">
+        <CommandFlag>DefaultDocked</CommandFlag>
+        <Strings>
+          <ButtonText>Toolbar</ButtonText>
+          <CommandName>Toolbar</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+    <Buttons>
+      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="CodeInBagToolWindowCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Code In Bag</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" />
+        <Strings>
+          <ButtonText>Add to CodeInBag</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" />
+        <Strings>
+          <ButtonText>Add to CodeInBag</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+    <Groups>
+      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" priority="0x0100">
+        <Parent guid="CodeEditorCommandSetGuid" id="CodeEditorContextMenuCommandId" />
+      </Group>
+      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" priority="0x0100">
+        <Parent guid="XamlEditorCommandSetGuid" id="XamlEditorContextMenuCommandId" />
+      </Group>
+      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup"  priority="0x0000">
+        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="Toolbar" />
+      </Group>
+    </Groups>
+    <Combos>
+      <Combo guid="guidCodeInBagToolWindowPackageCmdSet" id="CodeTypeSwitchCommand" priority="0x0050" type="IndexCombo" defaultWidth="80" idCommandList="CodeTypeSwitchCommandItemList">
+        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Type </ButtonText>
+          <ToolTipText>Code type</ToolTipText>
+        </Strings>
+      </Combo>
+
+      <Combo guid="guidCodeInBagToolWindowPackageCmdSet" id="KeywordSearchMRUCombo" priority="0x0200" type="MRUCombo" defaultWidth="120" idCommandList="0">
+        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup" />
+        <Strings>
+          <ButtonText>Keyword </ButtonText>
+          <ToolTipText>Keyword</ToolTipText>
+        </Strings>
+      </Combo>
+    </Combos>
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\CodeInBag.png" usedList="bmpPic1" />
+    </Bitmaps>
+  </Commands>
+  <KeyBindings>
+    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" editor="guidVSStd97" key1="1" mod1="Control" />
+    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" editor="guidVSStd97" key1="1" mod1="Control" />    
+    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="KeywordSearchMRUCombo" editor="guidVSStd97" key1="3" mod1="Control" />
+  </KeyBindings>
+  <Symbols>
+    <GuidSymbol name="guidCodeInBagToolWindowPackage" value="{e933b2c9-3933-4197-a457-2a5c2a9b98ad}" />
+    <GuidSymbol name="guidCodeInBagToolWindowPackageCmdSet" value="{570dccf9-a000-4b93-8656-a4b35b146edd}">
+      <IDSymbol name="CodeInBagToolWindowCommandId" value="0x0100" />
+
+      <IDSymbol name="Toolbar" value="0x0201" />
+      <IDSymbol name="ToolbarGroup" value="0x0202" />
+
+      <IDSymbol name="AddToCodeInBagCodeWinGroupId" value="0x2000" />
+      <IDSymbol name="AddToCodeInBagCodeWinCommandId" value="0x2001" />
+
+      <IDSymbol name="AddToCodeInBagXamlEditorGroupId" value="0x2002" />
+      <IDSymbol name="AddToCodeInBagXamlEditorCommandId" value="0x2003" />
+
+      <IDSymbol name="CodeTypeSwitchCommand" value="0x8000" />
+      <IDSymbol name="CodeTypeSwitchCommandItemList" value="0x8001" />
+      <IDSymbol name="KeywordSearchMRUCombo" value="0x8002" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{e06d8701-efed-48ea-b406-1a2ecd123b18}">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+
+    <!--
+    Capturing GUID + Command ID Instructions
+      1) Add EnableVSIPLogging DWORD with value 1 to: HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\14.0\General
+      2) Hold Ctrl + Shift and interact with IDE
+      3) A message dialog will pop up. For example, the XAML Editor will show:
+          Guid = {4C87B692-1202-46AA-B64C-EF01FAEC53DA}
+          GuidID = 225
+          CmdID = 259
+          Type = 0x00000400
+          Flags = 0x00000000
+          NameLoc = XAML Editor
+      4) The GUID and the CmdID are necessary to create a symbol. The CmdID needs to be mapped to a hex value.
+      -->
+
+    <GuidSymbol name="CodeEditorCommandSetGuid" value="{d309f791-903f-11d0-9efc-00a0c911004f}">
+      <IDSymbol name="CodeEditorContextMenuCommandId" value="0x040D" />
+    </GuidSymbol>
+
+    <GuidSymbol name="XamlEditorCommandSetGuid" value="{4c87b692-1202-46aa-b64c-ef01faec53da}">
+      <IDSymbol name="XamlEditorContextMenuCommandId" value="0x0103" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

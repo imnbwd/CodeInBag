@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="CodeInBag.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:behaviors="clr-namespace:CodeInBag.Behaviors"
+             xmlns:converters="clr-namespace:CodeInBag.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:platformUI="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
+             xmlns:vm="clr-namespace:CodeInBag.ViewModels"
+             x:Name="mainView"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             Background="{DynamicResource VsBrush.Window}"
+             Foreground="{DynamicResource VsBrush.WindowText}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="InversedIntToVisibilityConverter" IsInversed="True" />
+        <Style x:Key="ListViewItemStyle1" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static platformUI:EnvironmentColors.ComboBoxItemMouseOverBackgroundBrushKey}}" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static platformUI:EnvironmentColors.ComboBoxDisabledGlyphBrushKey}}" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                    <Condition Property="IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static platformUI:EnvironmentColors.ComboBoxSelectionBrushKey}}" />
+                                <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{DynamicResource {x:Static platformUI:EnvironmentColors.SystemHighlightTextBrushKey}}" />
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        </Style>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <ei:CallMethodAction MethodName="ControlLoaded" TargetObject="{Binding}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <TextBlock Margin="15"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Text="There are no code items. You can add selected code which in your editor to here by clicking 'Add to CodeInBag' from the context menu, or pressing short key Ctrl + 1."
+                   TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
+                   Visibility="{Binding AllCodeItems.Count,
+                                        Converter={StaticResource InversedIntToVisibilityConverter}}" />
+        <ListView Background="Transparent"
+                  BorderThickness="0"
+                  Focusable="False"
+                  ItemContainerStyle="{DynamicResource ListViewItemStyle1}"
+                  ItemsSource="{Binding ItemsView}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  SelectedItem="{Binding SelectedCodeItem,
+                                         Mode=OneWayToSource}"
+                  Visibility="{Binding AllCodeItems.Count,
+                                       Converter={StaticResource IntToVisibilityConverter}}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid behaviors:MouseDoubleClickBehavior.CommandParameter="{Binding}"
+                          behaviors:MouseDoubleClickBehavior.DoubleClickCommand="{Binding DataContext.InsertCodeToEditorCommand,
+                                                                                          ElementName=mainView}"
+                          Tag="{Binding DataContext,
+                                        ElementName=mainView}">
+                        <Grid.ToolTip>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Content}" />
+                                <TextBlock />
+                                <TextBlock>
+                                    <Run Text="Type:" />
+                                    <Run Text="{Binding Type}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid.ToolTip>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Title}" Visibility="{Binding Title, Converter={StaticResource StringToVisibilityConverter}}" />
+                        <TextBlock Grid.Row="1"
+                                   behaviors:LineHeightBehavior.MaxLines="1"
+                                   LineHeight="18"
+                                   Opacity="0.6"
+                                   Text="{Binding Content}"
+                                   TextTrimming="CharacterEllipsis" />
+                        <Grid.ContextMenu>
+                            <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" Placement="Right">
+                                <MenuItem Command="{Binding RemoveItemCommand}" Header="Remove" />
+                            </ContextMenu>
+                        </Grid.ContextMenu>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>
