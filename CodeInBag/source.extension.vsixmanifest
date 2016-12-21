@@ -4,6 +4,8 @@
     <Identity Id="CodeInBag.imnbwd.83866169-555f-4566-819c-ecb3dbebe2ee" Version="1.0" Language="en-US" Publisher="imnbwd" />
     <DisplayName>Code In Bag</DisplayName>
     <Description xml:space="preserve">Add commonly used code into your code bag and insert it new file rapidly</Description>
+    <MoreInfo>https://github.com/imnbwd/CodeInBag</MoreInfo>
+    <GettingStartedGuide>https://github.com/imnbwd/CodeInBag</GettingStartedGuide>
     <Icon>Resources\CodeInBag_Large.png</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
     <Tags>Code XAML C# VB WPF UWP </Tags>
