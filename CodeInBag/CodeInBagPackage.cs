@@ -18,7 +18,7 @@ namespace CodeInBag
     [ProvideToolWindow(typeof(CodeInBagToolWindow))]
     [Guid(Constant.PackageGuid)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    public sealed class CodeInBagToolWindowPackage : Package
+    public sealed class CodeInBagPackage : Package
     {
         /// <summary>
         /// Package Name
@@ -27,7 +27,7 @@ namespace CodeInBag
 
         public static Container Container;
 
-        public CodeInBagToolWindowPackage()
+        public CodeInBagPackage()
         {
             // http://geekswithblogs.net/onlyutkarsh/archive/2013/06/02/loading-custom-assemblies-in-visual-studio-extensions-again.aspx
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
@@ -60,18 +60,13 @@ namespace CodeInBag
 
         private Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            var Newtonsoft_Json = "Newtonsoft.Json".ToLower();
             var System_Windows_Interactivity = "System.Windows.Interactivity".ToLower();
             var Microsoft_Expression_Interactions = "Microsoft.Expression.Interactions".ToLower();
             var path = Assembly.GetExecutingAssembly().Location;
             path = Path.GetDirectoryName(path);
 
-            var requestAssemblyName = args.Name.ToLower();
-            if (requestAssemblyName.Contains(Newtonsoft_Json))
-            {
-                return Assembly.LoadFrom(Path.Combine(path, $"{Newtonsoft_Json}.dll"));
-            }
-            else if (requestAssemblyName.Contains(System_Windows_Interactivity))
+            var requestAssemblyName = args.Name.ToLower();    
+            if (requestAssemblyName.Contains(System_Windows_Interactivity))
             {
                 return Assembly.LoadFrom(Path.Combine(path, $"{System_Windows_Interactivity}.dll"));
             }

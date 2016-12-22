@@ -1,5 +1,6 @@
 ﻿using CodeInBag.ViewModels;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using SimpleInjector;
 using System;
@@ -61,13 +62,19 @@ namespace CodeInBag.Commands
                 var text = dte.ActiveDocument.Selection as TextSelection;
                 if (string.IsNullOrWhiteSpace(text.Text))
                 {
-                    VsShellUtilities.ShowMessageBox(this.ServiceProvider, "No selected text", CodeInBagToolWindowPackage.Name,
+                    VsShellUtilities.ShowMessageBox(this.ServiceProvider, "No selected text", CodeInBagPackage.Name,
                         Microsoft.VisualStudio.Shell.Interop.OLEMSGICON.OLEMSGICON_WARNING,
                          Microsoft.VisualStudio.Shell.Interop.OLEMSGBUTTON.OLEMSGBUTTON_OK,
                           Microsoft.VisualStudio.Shell.Interop.OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST
                         );
                     return;
                 }
+
+                // Activate the tool window before inserting new item to the list
+                var toolWindow = this.package.FindToolWindow(typeof(CodeInBagToolWindow), 0, true);
+
+                // https://social.msdn.microsoft.com/Forums/vstudio/en-US/2da1f1b1-e160-4330-b30b-3c1d3c02142b/how-to-force-activation-of-toolwindow?forum=vsx
+                dte.Windows.Item(toolWindow.Caption).Activate();
 
                 var mainViewModel = container.GetInstance<MainViewModel>();
                 mainViewModel.AllCodeItems.Add(

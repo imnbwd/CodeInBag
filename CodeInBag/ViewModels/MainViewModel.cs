@@ -96,7 +96,7 @@ namespace CodeInBag.ViewModels
         {
             // create package folder under MyDocument folder
             var documentFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var packageFolder = $@"{documentFolder}\{CodeInBagToolWindowPackage.Name}";
+            var packageFolder = $@"{documentFolder}\{CodeInBagPackage.Name}";
             if (!Directory.Exists(packageFolder))
             {
                 Directory.CreateDirectory(packageFolder);

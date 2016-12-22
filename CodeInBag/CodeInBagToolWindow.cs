@@ -11,9 +11,9 @@ namespace CodeInBag
     {
         public CodeInBagToolWindow() : base(null)
         {
-            this.Caption = CodeInBagToolWindowPackage.Name;
+            this.Caption = CodeInBagPackage.Name;
 
-            this.Content = CodeInBagToolWindowPackage.Container.GetInstance<MainView>();
+            this.Content = CodeInBagPackage.Container.GetInstance<MainView>();
             this.ToolBar = new CommandID(new Guid(Constant.CommandSetGuid), Constant.ToolbarId);
         }
     }

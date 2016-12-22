@@ -59,10 +59,13 @@
     <Compile Include="Commands\AddToCodeInBagCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CodeInBagToolWindowCommand.cs" />
-    <Compile Include="CodeInBagToolWindowPackage.cs" />
+    <Compile Include="CodeInBagPackage.cs" />
     <Compile Include="Commands\CodeTypeSwitchCommand.cs" />
     <Compile Include="Commands\KeywordSearchCommand.cs" />
     <Compile Include="Constant.cs" />
+    <Compile Include="Controls\NotificationPane.xaml.cs">
+      <DependentUpon>NotificationPane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Models\CodeItem.cs" />
@@ -179,9 +182,9 @@
       <HintPath>..\packages\Microsoft.VisualStudio.Validation.14.1.111\lib\net45\Microsoft.VisualStudio.Validation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -222,7 +225,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <VSCTCompile Include="CodeInBagToolWindowPackage.vsct">
+    <VSCTCompile Include="CodeInBagPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
     </VSCTCompile>
@@ -233,6 +236,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Controls\NotificationPane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ItemEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

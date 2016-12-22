@@ -2,9 +2,9 @@
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <Extern href="stdidcmd.h" />
   <Extern href="vsshlids.h" />
-  <Commands package="guidCodeInBagToolWindowPackage">
+  <Commands package="guidCodeInBagPackage">
     <Menus>
-      <Menu guid="guidCodeInBagToolWindowPackageCmdSet" id="Toolbar" type="Toolbar">
+      <Menu guid="guidCodeInBagPackageCmdSet" id="Toolbar" type="Toolbar">
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
           <ButtonText>Toolbar</ButtonText>
@@ -13,48 +13,48 @@
       </Menu>
     </Menus>
     <Buttons>
-      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="CodeInBagToolWindowCommandId" priority="0x0100" type="Button">
+      <Button guid="guidCodeInBagPackageCmdSet" id="CodeInBagToolWindowCommandId" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Code In Bag</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" />
+      <Button guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" />
         <Strings>
           <ButtonText>Add to CodeInBag</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" />
+      <Button guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" />
         <Strings>
           <ButtonText>Add to CodeInBag</ButtonText>
         </Strings>
       </Button>
     </Buttons>
     <Groups>
-      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" priority="0x0100">
+      <Group guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagCodeWinGroupId" priority="0x0100">
         <Parent guid="CodeEditorCommandSetGuid" id="CodeEditorContextMenuCommandId" />
       </Group>
-      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" priority="0x0100">
+      <Group guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagXamlEditorGroupId" priority="0x0100">
         <Parent guid="XamlEditorCommandSetGuid" id="XamlEditorContextMenuCommandId" />
       </Group>
-      <Group guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup"  priority="0x0000">
-        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="Toolbar" />
+      <Group guid="guidCodeInBagPackageCmdSet" id="ToolbarGroup"  priority="0x0000">
+        <Parent guid="guidCodeInBagPackageCmdSet" id="Toolbar" />
       </Group>
     </Groups>
     <Combos>
-      <Combo guid="guidCodeInBagToolWindowPackageCmdSet" id="CodeTypeSwitchCommand" priority="0x0050" type="IndexCombo" defaultWidth="80" idCommandList="CodeTypeSwitchCommandItemList">
-        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup" />
+      <Combo guid="guidCodeInBagPackageCmdSet" id="CodeTypeSwitchCommand" priority="0x0050" type="IndexCombo" defaultWidth="80" idCommandList="CodeTypeSwitchCommandItemList">
+        <Parent guid="guidCodeInBagPackageCmdSet" id="ToolbarGroup" />
         <Strings>
           <ButtonText>Type </ButtonText>
           <ToolTipText>Code type</ToolTipText>
         </Strings>
       </Combo>
 
-      <Combo guid="guidCodeInBagToolWindowPackageCmdSet" id="KeywordSearchMRUCombo" priority="0x0200" type="MRUCombo" defaultWidth="120" idCommandList="0">
-        <Parent guid="guidCodeInBagToolWindowPackageCmdSet" id="ToolbarGroup" />
+      <Combo guid="guidCodeInBagPackageCmdSet" id="KeywordSearchMRUCombo" priority="0x0200" type="MRUCombo" defaultWidth="120" idCommandList="0">
+        <Parent guid="guidCodeInBagPackageCmdSet" id="ToolbarGroup" />
         <Strings>
           <ButtonText>Keyword </ButtonText>
           <ToolTipText>Keyword</ToolTipText>
@@ -66,13 +66,13 @@
     </Bitmaps>
   </Commands>
   <KeyBindings>
-    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" editor="guidVSStd97" key1="1" mod1="Control" />
-    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" editor="guidVSStd97" key1="1" mod1="Control" />    
-    <KeyBinding guid="guidCodeInBagToolWindowPackageCmdSet" id="KeywordSearchMRUCombo" editor="guidVSStd97" key1="3" mod1="Control" />
+    <KeyBinding guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagCodeWinCommandId" editor="guidVSStd97" key1="1" mod1="Control" />
+    <KeyBinding guid="guidCodeInBagPackageCmdSet" id="AddToCodeInBagXamlEditorCommandId" editor="guidVSStd97" key1="1" mod1="Control" />    
+    <KeyBinding guid="guidCodeInBagPackageCmdSet" id="KeywordSearchMRUCombo" editor="guidVSStd97" key1="3" mod1="Control" />
   </KeyBindings>
   <Symbols>
-    <GuidSymbol name="guidCodeInBagToolWindowPackage" value="{e933b2c9-3933-4197-a457-2a5c2a9b98ad}" />
-    <GuidSymbol name="guidCodeInBagToolWindowPackageCmdSet" value="{570dccf9-a000-4b93-8656-a4b35b146edd}">
+    <GuidSymbol name="guidCodeInBagPackage" value="{e933b2c9-3933-4197-a457-2a5c2a9b98ad}" />
+    <GuidSymbol name="guidCodeInBagPackageCmdSet" value="{570dccf9-a000-4b93-8656-a4b35b146edd}">
       <IDSymbol name="CodeInBagToolWindowCommandId" value="0x0100" />
 
       <IDSymbol name="Toolbar" value="0x0201" />
